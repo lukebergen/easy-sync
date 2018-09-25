@@ -10,7 +10,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "wt create ./index.js --no-parse --name one-time-secret"
+    "deploy": "wt create ./index.js --no-parse --name one-time-secret",
+    "local": "wt serve ./index.js"
   },
   "author": "Luke Bergen",
   "license": "ISC"

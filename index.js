@@ -9,6 +9,10 @@ app.get("/", (req, res) => {
     <html>
       <body>
         <script>
+          var href = window.location.href;
+          if (href[href.length-1] == "/") {
+            window.location = href.slice(0, href.length-1);
+          }
           function gen() {
             let text = "";
             let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -23,14 +27,10 @@ app.get("/", (req, res) => {
           function go() {
             let key = document.getElementById("key").value
             let body = document.getElementById("value").value
-            url = document.location + "/" + key;
+            url = window.location + "/" + key;
             fetch(url, {method: "POST", body: body}).then((response) => {
               el = document.getElementById("result");
-              link = document.location.href;
-              if (link[link.length-1] != "/") {
-                link += "/"
-              }
-              link += key;
+              link = (window.location + "/").replace(/\\/\\/$/, "/") + key;
               el.innerHTML = 'created your message at <a href="' + link + '">' + link + '</a>';
             });
           }
