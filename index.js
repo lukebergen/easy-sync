@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
             fetch(url, {method: "POST", body: body}).then((response) => {
               el = document.getElementById("result");
               link = (window.location + "/").replace(/\\/\\/$/, "/") + key;
-              el.innerHTML = 'created your message at <a href="' + link + '">' + link + '</a>';
+              el.innerHTML = 'Created your one-time message at <a href="' + link + '">' + link + '</a><br />Once the message has been viewed a single time it will be destroyed.';
             });
           }
         </script>
@@ -74,7 +74,6 @@ app.post("/:key", (req, res) => {
         body += chunk.toString(); // convert Buffer to string
     });
     req.on('end', () => {
-      console.log("setting: ", body);
       sSet(req.params.key, body, req.webtaskContext.storage).then((result) => {
         res.end("ok");
       }, (reason) => {
@@ -91,7 +90,6 @@ function checkReq(req, method = "GET") {
 }
 
 function sGet(key, store) {
-  console.log("getting key: " + key);
   return new Promise((resolve, reject) => {
     store.get((err, data) => {
       if (data[key]) {
@@ -112,7 +110,6 @@ function sGet(key, store) {
 }
 
 function sSet(key, val, store) {
-  console.log("setting key: " + key + " to: " + val);
   return new Promise((resolve, reject) => {
     store.get((err, data) => {
       data = data || {};
