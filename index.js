@@ -1,10 +1,8 @@
 var Express = require('express');
 var Webtask = require('webtask-tools');
-var bodyParser = require('body-parser')
 var app = Express();
 
-// TODO: set a limit
-//app.use(bodyParser.raw())
+// TODO: set message size limit
 
 app.get("/", (req, res) => {
   res.end(`
@@ -52,13 +50,6 @@ app.get("/", (req, res) => {
     </html>
   `);
 });
-
-// for debugging purposes
-//app.get("/check", (req, res) => {
-//  req.webtaskContext.storage.get((error, data) => {
-//    res.json(data);
-//  });
-//});
 
 app.get("/:key", (req, res) => {
   if (!checkReq(req)) {
